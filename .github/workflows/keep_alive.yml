@@ -1,0 +1,16 @@
+name: Streamlit Keep-Alive
+
+on:
+  schedule:
+    # 每天的 UTC 时间 0 点（北京时间早上 8 点）执行一次访问
+    - cron: "0 0 * * *"
+  workflow_dispatch: # 保留手动触发按钮，方便测试
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Streamlit App
+        # ⚠️ 请确认下方的网址是你新应用的真实网址
+        run: |
+          curl -s -o /dev/null -w "HTTP Status: %{http_code}\n" https://guanjian201.streamlit.app/
